@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Menu</title>
+    <script src="./script.js"></script>
+    <script>
+      window.onload = function() {
+        var menu = new Menu('menu', 'menu', [
+          new MenuItem('/', 'Home'),
+          new MenuItem('/news', 'News'),
+          new MenuItem('/blog', 'Blog'),
+            new MenuItem('/exit', 'Exit'),
+        ]);
+
+        document.body.appendChild(menu.render());
+      }
+    </script>
+  </head>
+  <body>
+  <button id="delete">Удалить контейнер</button>
+  </body>
+</html>
