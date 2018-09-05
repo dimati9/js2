@@ -1,21 +1,40 @@
-<html>
-  <head>
-    <title>Menu</title>
-    <script src="./script.js"></script>
-    <script>
-      window.onload = function() {
-        var menu = new Menu('menu', 'menu', [
-          new MenuItem('/', 'Home'),
-          new MenuItem('/news', 'News'),
-          new MenuItem('/blog', 'Blog'),
-            new MenuItem('/exit', 'Exit'),
-        ]);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<form method="post" action="index.html" onsubmit="return validator();">
 
-        document.body.appendChild(menu.render());
-      }
-    </script>
-  </head>
-  <body>
-  <button id="delete">Удалить контейнер</button>
-  </body>
+    <div class="flex">
+        <div class="block">
+            <h3>Ваше имя</h3>
+            <input type="text" id="name" placeholder="Ваше имя" name="name">
+            <h4 id="name-error" ></h4>
+        </div>
+
+        <div class="block">
+            <h3>Ваш номер телефона</h3>
+            <input type="text" id="phone" placeholder="Ваш номер" name="phone" >
+            <h4 id="phone-error" ></h4>
+        </div>
+        <div class="block">
+            <h3>E-mail</h3>
+            <input type="text" id="email" placeholder="E-mail" name="password">
+            <h4 id="email-error" ></h4>
+        </div>
+        <div class="block">
+            <h3>Текст</h3>
+            <input type="text" placeholder="Текст" id="text">
+            
+        </div>
+    </div>
+
+    <input type="submit" value="Отправить" id="submit">
+</form>
+
+<script src="script.js"></script>
+</body>
 </html>
