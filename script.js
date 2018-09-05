@@ -1,64 +1,90 @@
+var text = "'lala'  lal'a 'lala'  ";
 
-function Container(id, className) {
-  this.id = id;
-  this.class = className;
-}
+console.log(text.replace(/\'/g, '"'));
 
-Container.prototype.render = function() {
-  var div = document.createElement('div');
-
-  div.className = this.className;
-  div.id = this.id;
-
-  return div;
-}
-
-Container.prototype.remove = function () {
-    var node = document.getElementById(this.id);
-
-    node.parentElement.removeChild(node);
-}
+console.log(text.replace(/(\B\'|\'\B)/gm, '"'));
 
 
 
-function Menu(id, className, items) {
-  Container.call(this, id, className);
 
-  this.items = items;
-}
 
-Menu.prototype = Object.create(Container.prototype);
-Menu.prototype.render = function() {
-  var ul = document.createElement('ul');
-  ul.className = this.class;
-  ul.id = this.id;
+function validator() {
+    var valid = true;
+    //Определяем поле и его сообщение об ошибке
+    var name = document.getElementById('name');
+    var nameError = document.getElementById('name-error');
+    var nameTest = /^[ёа-яЁА-Я]{2,}$/g;
 
-  this.items.forEach(function(item) {
-    if (item instanceof Container) {
-      ul.appendChild(item.render());
+    //Определяем поле и его сообщение об ошибке
+    var phone = document.getElementById('phone');
+    var phoneError = document.getElementById('phone-error');
+    var phoneTest =  /^\+7\(\d{3,3}\)\d{3,3}\-\d{4,4}$/; 
+ 
+    //Определяем поле и его сообщение об ошибке
+    var email = document.getElementById('email');
+    var emailError = document.getElementById('email-error');
+    var emailTest = /^\w{1,}\S*\w*\@{1,1}\w{2,}\.\w{2,6}$/i;
+
+
+
+
+
+
+
+        if (!nameTest.test(name.value)) {
+            nameError.textContent = 'Имя - может содержать только буквы (Русский алфавит, не менее 2-х).';
+            name.className = 'error';
+            console.log(nameTest.test(name.toString));
+
+
+
+                valid = false;
+        }
+        else {
+            nameError.textContent = '';
+            name.className = 'good';
+
+
+        }
+
+
+
+        if (!phoneTest.test(phone.value)) {
+            phoneError.textContent = `Точно по форме '+7(000)000-0000'`;
+            phone.className = 'error';
+            phoneError.style.display = 'block';
+            valid = false;
+        }
+        else {
+            phoneError.textContent = '';
+            phone.className = 'good';
+        }
+
+    
+    if (!emailTest.test(email.value)) {
+        emailError.textContent = 'Например: mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru ';
+        
+        emailError.style.display = 'block';
+        email.className = 'error';
+
+        valid = false;
+
+
+
     }
-  });
+    else {
+        emailError.textContent = '';
+        email.className = 'good';
+    }
 
-  return ul;
+
+
+        return valid;
+
+
 }
 
-function MenuItem(href, label) {
-  Container.call(this, '', 'menu-item');
 
-  this.href = href;
-  this.label = label;
-}
+   
+    
 
-MenuItem.prototype = Object.create(Container.prototype);
-MenuItem.prototype.render = function() {
-  var li = document.createElement('li');
-  var a = document.createElement('a');
-
-  a.href = this.href;
-  a.textContent = this.label;
-
-  li.appendChild(a);
-  li.className = this.class;
-
-  return li;
-}
